@@ -10,8 +10,7 @@ import traceback
 
 
 def new_avg(arr, newavg):
-    # Тело функции
-    return 0
+    return newavg * (1+len(arr)) - sum(arr) 
 
 
 # Тесты
