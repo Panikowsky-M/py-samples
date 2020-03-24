@@ -10,8 +10,15 @@
 import traceback
 
 
+num_weight = lambda x: sum(int(i) for i in str(x))
+
 def order_weight(integers):
-    integers.sort(key=lambda x: sum(int(i) for i in str(x)))
+    for i in range(len(integers)-1):
+        if num_weight(integers[i]) < num_weight(integers[i+1]):
+            integers.sort(key=num_weight)
+        elif num_weight(integers[i]) == num_weight(integers[i+1]):
+            integers.sort()
+    print(integers)
     return integers
 
 
