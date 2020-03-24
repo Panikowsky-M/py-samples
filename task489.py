@@ -11,8 +11,8 @@ import traceback
 
 
 def order_weight(integers):
-    # Тело функции
-    return 0
+    integers.sort(key=lambda x: sum(int(i) for i in str(x)))
+    return integers
 
 
 # Тесты
