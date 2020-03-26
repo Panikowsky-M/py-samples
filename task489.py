@@ -17,7 +17,7 @@ def order_weight(integers):
         if num_weight(integers[i]) < num_weight(integers[i+1]):
             integers.sort(key=num_weight)
         elif num_weight(integers[i]) == num_weight(integers[i+1]):
-            integers.sort()
+            sorted(integers)
     print(integers)
     return integers
 

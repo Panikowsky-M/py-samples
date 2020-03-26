@@ -1,0 +1,5 @@
+Vim's forerunner, Stevie (ST Editor for VI Enthusiasts), was created by Tim Thompson for the Atari ST in 1987[9][10] and further developed by Tony Andrews[9][11] and G.R. (Fred) Walter.[12][13]
+
+Basing his work on Stevie, Bram Moolenaar began working on Vim for the Amiga computer in 1988, with the first public release (Vim v1.14) in 1991.[14][15][better source needed]
+
+At the time of its first release, the name "Vim" was an acronym for "Vi IMitation", but this changed to "'Vi IMproved" late in 1993.[16]
