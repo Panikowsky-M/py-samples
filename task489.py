@@ -9,17 +9,14 @@
 
 import traceback
 
-
-num_weight = lambda x: sum(int(i) for i in str(x))
-
 def order_weight(integers):
-    for i in range(len(integers)-1):
-        if num_weight(integers[i]) < num_weight(integers[i+1]):
-            integers.sort(key=num_weight)
-        elif num_weight(integers[i]) == num_weight(integers[i+1]):
-            sorted(integers)
-    print(integers)
-    return integers
+    res = sorted([str(x) for x in integers])
+    res = sorted(res,key = lambda x: sum(int(d) for d in x))
+    out = []
+    for j in range(len(res)):
+        out.append(int(res[j]))
+    print(out)
+    return out
 
 
 # Тесты
