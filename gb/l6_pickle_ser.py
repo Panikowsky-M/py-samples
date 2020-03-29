@@ -1,9 +1,5 @@
 import pickle
-fav_tracks = [
-    {'name':'В интересах революции','artist': 'Агата Кристи'},
-    {'name':'Деньги на ветер','artist': 'Би-2'},
-    {'name':'Земля','artist': 'Маша и Медведи'},
-]
+from music_list import *
 
 with open('songslist.dat','wb') as file:
 
@@ -18,4 +14,3 @@ print('Вот вывод записанной\
 d = open('songslist.dat','rb')
 cat = d.readlines()
 print(cat,'\n')
-

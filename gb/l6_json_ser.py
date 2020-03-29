@@ -1,10 +1,5 @@
 import json
-
-fav_tracks = [
-    {'name':'В интересах революции','artist': 'Агата Кристи'},
-    {'name':'Деньги на ветер','artist': 'Би-2'},
-    {'name':'Земля','artist': 'Маша и Медведи'},
-]
+from music_list import *
 
 with open('songslist.json','w',encoding='utf-8') as myList:
     json.dump(fav_tracks,myList)
