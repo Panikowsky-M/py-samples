@@ -1,13 +1,13 @@
 import re
+import operator
 
-def Delbs(f_name,pattL):
-	newList = []
-	with open(f_name,'r') as file:
-		text = " ".join([x.strip("\n") for x in file.readlines()])
-	for patt in pattL:
-		newList.append(patt)
-	return set(newList)
-text = open('wiki_text.txt','r')
-rdL = str(text.readlines())
-p = re.findall('\w+',rdL)
-print(Delbs('wiki_text.txt',p))
+f = open('wiki_text.txt','rb')
+text = str(f.readlines())
+print(text)
+
+words = re.findall('[a-zA-Z]+',text)
+
+stats = {}
+for w in words:
+    stats[w] = stats.get(w,0) +1
+print(stats)
