@@ -1,5 +1,11 @@
+Vim (/vɪm/;[2] a contraction of Vi IMproved) is a clone, with additions, of Bill Joy's vi text editor program for Unix. Vim's author, Bram Moolenaar, based it upon the source code for a port of the Stevie editor to the Amiga[3] and released a version to the public in 1991. Vim is designed for use both from a command-line interface and as a standalone application in a graphical user interface. Vim is free and open-source software and is released under a license that includes some charityware clauses, encouraging users who enjoy the software to consider donating to children in Uganda.[4] The license is compatible with the GNU General Public License through a special clause allowing distribution of modified copies "under the GNU GPL version 2 or any later version".[5]
+Since its release for the Amiga, cross-platform development has made it available on many other systems. In 2006, it was voted the most popular editor amongst Linux Journal readers;[6] in 2015 the Stack Overflow developer survey found it to be the third most popular text editor,[7] and the fifth most popular development environment in 2019.[8]
+History[edit]
 Vim's forerunner, Stevie (ST Editor for VI Enthusiasts), was created by Tim Thompson for the Atari ST in 1987[9][10] and further developed by Tony Andrews[9][11] and G.R. (Fred) Walter.[12][13]
-
 Basing his work on Stevie, Bram Moolenaar began working on Vim for the Amiga computer in 1988, with the first public release (Vim v1.14) in 1991.[14][15][better source needed]
-
 At the time of its first release, the name "Vim" was an acronym for "Vi IMitation", but this changed to "'Vi IMproved" late in 1993.[16]
+Interface[edit]
+Graphical Vim (gVim) under GTK+ 2.
+Like vi, Vim's interface is not based on menus or icons but on commands given in a text user interface; its GUI mode, gVim, adds menus and toolbars for commonly used commands but the full functionality is still expressed through its command line mode. Vi (and by extension Vim) tends to allow a typist to keep their fingers on the home row, which can be an advantage for a touch typist.[29]
+Vim has a built-in tutorial for beginners called vimtutor. It's usually installed along with Vim, but it exists as a separate executable and can be run with a shell command.[30] There is also the Vim Users' Manual that details Vim's features and a FAQ. This manual can be read from within Vim, or found online.[31][32]
+Vim also has a built-in help facility (using the :help command) that allows users to query and navigate through commands and features.
