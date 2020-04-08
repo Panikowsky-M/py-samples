@@ -8,12 +8,22 @@
 
 import traceback
 
+from datetime import timedelta
+from time import gmtime,strftime,strptime
 
-def stat(s):
-    # Тело функции
-    return ""
+def stat(x):
+    def fmt_tDelta(tDelta):
+        return strftime("%H|%M|%S", gmtime(tDelta.seconds) )
 
+    tList = []
+    for t in x.split(', '):
+        h,m,s = map(int, t.split('|'))
+        tList.append(timedelta(hours = h,minutes = m,seconds = s))
 
+    rng = fmt_tDelta(max(tList) - min(tList))
+    avg = fmt_tDelta(sum(tList,timedelta()) / len(tList))
+    return f"Range: {rng} Average: {avg}"
+#print(stat("01|15|59, 1|47|16, 01|17|20, 1|32|34, 2|17|17"))
 # Тесты
 try:
     assert stat("01|15|59, 1|47|16, 01|17|20, 1|32|34, 2|17|17") == "Range: 01|01|18 Average: 01|38|05"
