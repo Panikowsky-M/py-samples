@@ -5,7 +5,7 @@
 # Реализовать функции:
 # + вывода информации о всех книгах;
 # + вывода информации о книге по введенному с клавиатуры номеру;
-# – вывода количества книг, старше введённого года;
+# + вывода количества книг, старше введённого года;
 # – обновлении всей информации о книге по введенному номеру;
 # + удалении книги по номеру.
 # Провести тестирование функций.
@@ -28,20 +28,19 @@ library = [{"id": 12,\
             "year": 1997}]
 
 def listAll(lib):
-    for i in range(len(library)):
+    for i in range(len(lib)):
         el = '{},{},{},{}'\
              .format( lib[i].get('id'),\
                       lib[i].get('title'),\
                       lib[i].get('group'),\
                       lib[i].get('year'))
-        print("%s\n" % el)
+        print("%s\n"% el) 
 
 def outByNums(x,lib):
-    for i in range(len(library)):
-        el_sym = lib[i].get('id')
-        if int(x) is el_sym: 
+    for i,el in enumerate(lib):  #Сокращает проход по списку с трех до двух
+        if x is el['id']:        #строк кода
             el2 = '{},{},{},{}'\
-                  .format( library[i].get('id'),\
+                  .format( lib[i].get('id'),\
                   lib[i].get('title'),\
                   lib[i].get('group'),\
                   lib[i].get('year'))
@@ -53,7 +52,19 @@ def popByNums(x,lib):
             lib.pop(i)
             return el
 
-print(listAll(library))
-x_in = int(input())
-print(popByNums(x_in,library))
-print(listAll(library))
+def outByYear(x,lib):
+    c = 0 
+    for i,el in enumerate(lib): 
+        if x < el['year']:
+            c+=1   
+    print(c)
+
+
+#listAll(library)
+x_in = int(input('Вводите года для поиска\n'))
+#print(outByNums(x_in,library))
+outByYear(x_in,library)
+#print(listAll(library))
+
+#x_in = int(input())
+#print(outByYear(x_in,library))
