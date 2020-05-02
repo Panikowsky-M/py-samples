@@ -10,6 +10,8 @@
 # + удалении книги по номеру.
 # Провести тестирование функций.
 
+#import re
+
 library = [{"id": 12,\
             "title" : "В интересах революции",\
             "album" : "???",\
@@ -92,7 +94,8 @@ def popByNums(x,lib):
     for i,el in enumerate(lib): 
         if x is el['id']:
             lib.pop(i)
-            return el
+            print('Удалено!\n')
+            return el['id']
 
 def outNumOfElders(x,lib):
     c = 0 
@@ -115,13 +118,38 @@ def Refresh(x,lib):
                            lib[i].get('year'))
    return el2 
 
+x = int(input('Вводите номера от 12 до 22: '))
+Refresh(x,library)
+listAll(library)
+popByNums(x,library)
+outNumOfElders(2004,library)
+listAll(library)
 
-listAll(library)
-x_in = int(input('Вводите года/номера для поиска\n'))
-#print(outByNums(x_in,library))
-#outNumOfElders(x_in,library)
-#print(listAll(library))
-print(Refresh(x_in,library))
-listAll(library)
-#x_in = int(input())
-#print(outByYear(x_in,library))
+#s = '' 
+#if x_in  == 'all':
+#    s = 'listAll(library)'
+#    eval(s)
+#elif x_in  == 'ref':
+#     n = int(input('Введите номер ячейки: \n'))
+#     s = 'Refresh(n,library)'
+#     eval(s)
+#     listAll(library)
+#
+#if re.findall('[pop]?\d{2}',x_in):
+#    X = re.split('[a-z]+',x_in)
+#    n = int(X[1])
+#    s = 'print(popByNums(n,library))'
+#    eval(s)
+#    print('\n')
+#    listAll(library)
+#
+#if re.findall('[a-z]+?\d{2,}?',x_in):
+#    #X = re.split('[a-z]+',x_in)
+#    n = int(x_in)
+#    s = 'print(outByNums(n,library))'
+#    eval(s)
+#    if re.findall('[year]?\d{4}',x_in):
+#        X = re.split('[a-z]+',x_in)
+#        n = int(X[1])
+#    s = 'outNumOfElders(n,library)'
+#    eval(s)
