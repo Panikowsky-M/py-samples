@@ -3,8 +3,8 @@ from hospital import Hospital
 from nurse import Nurse 
 from doctor import Doctor 
 
-d = Doctor('Александр','Петров',32)
-print(d)
+d = Doctor("Александр", "Петров", 32)
+print(str(d))
 #try:
 #d = Doctor("Иван", "Иванов", 20)
 #assert str(d) == "Иван Иванов, 20 лет"

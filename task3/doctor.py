@@ -2,10 +2,8 @@ from person import Person
 
 class Doctor(Person):
 
-    def _start(license,specialty,age,surname,name):
-        super()._start(license,specialty)
-        self.licNum = license
-        self.spec = specialty
+    def __init__(self,surname,name,age):
+        super(Person,self).__init__(surname,name,age)
         self.patList = {}
 
     def addPatient(self,card,name,surname):
