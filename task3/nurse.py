@@ -2,9 +2,9 @@ from person import Person
 
 class Nurse(Person):
 
-    def _start(self,name,surname,age):
-        super()._start(state,shed,lic)
-        self.shedule = {}
+    def __init__(self,name,surname,age):
+       Person._start(self,state,shed,lic)
+       self.shedule = {}
     
     def addWorkDay(self,day,time):
         self.shedule[day] = time
@@ -21,7 +21,7 @@ class Nurse(Person):
     def setspeciality(self, spec):
         self.spec = speciality
     
-    def NewStr(self):
+    def __str__(self):
         return "{} {}, {} лет, {}".format(self.name, self.surname, self.age,\
                self.speciality)
 

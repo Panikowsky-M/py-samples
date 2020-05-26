@@ -3,15 +3,12 @@ from hospital import Hospital
 from nurse import Nurse 
 from doctor import Doctor 
 
-d = Doctor("Александр", "Петров", 32)
-print(str(d))
-#try:
-#d = Doctor("Иван", "Иванов", 20)
-#assert str(d) == "Иван Иванов, 20 лет"
-#
-#d.addPatient(12, 12000.50)
-#d.addPatient(4, 4747.00)
-#assert d.Dprint() == "стол 12: 12000.50 руб\nстол 4: 4747.00 руб\n"
+try:
+    d = Doctor("Александр", "Петров", 32)
+    assert str(d) == "Петров Александр, 32 лет"
+
+    d.addPatient(777,"Сергей","Бурунов")
+    assert d.Dprint()  == "Мед.книжка 777: Бурунов Сергей\n"
 #
 #w.removeCheck(4)
 #assert w.printChecks() == "стол 12: 12000.50 руб\n"
@@ -51,8 +48,8 @@ print(str(d))
 #
 #
 #
-#except AssertionError:
-#print("TEST ERROR")
-#traceback.print_exc()
-#else:
-#print("TEST PASSED")
+except AssertionError:
+    print("TEST ERROR")
+    traceback.print_exc()
+else:
+    print("TEST PASSED")
