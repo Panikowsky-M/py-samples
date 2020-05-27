@@ -14,13 +14,12 @@ doc = xml.dom.minidom.parse(response)
 
 valute = doc.getElementsByTagName("Valute")
 names = []
+values = []
 for val in valute:
    name = val.getElementsByTagName("Name")[0]
    names.append(name.firstChild.data)
-   #childList=val.childNodes
-   #for child in childList:
-   #     print(child.nodeName)
-   #     print(child.childNodes[0].nodeValue)
+   value = val.getElementsByTagName("Value")[0]
+   values.append(value.firstChild.data)
 
 window = Tk()
 window.title("Конвертер валют")
@@ -41,8 +40,8 @@ convValute["values"] = [i for i in names]
 convValute.grid(column=2, row=0)
 
 txt = Entry(tab1)
-#btn = Button(tab1, text="Действ.", command=click)
-lbl = Label(tab1,text="")
+lbl0 = Label(tab1,text="Sample Text")
+lbl0.grid(row=2,column=5,sticky="w")
 
 tab_control.pack(expand=1,fill='both')
 window.mainloop()
