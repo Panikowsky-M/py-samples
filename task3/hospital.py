@@ -9,13 +9,13 @@ class Hospital:
         self.doctors = []
         self.nurses  = []
     
-    def NewLen(self):
+    def __len__(self):
         return len(self.doctors) + len(self.nurses)
     
-    def NewAdd(self, worker):
-        if isinstance(worker, Waiter):
+    def __add__(self, worker):
+        if isinstance(worker, Doctor):
             self.doctors.append(worker)
-        elif isinstance(worker, Cook):
+        elif isinstance(worker, Nurse):
             self.nurses.append(worker)
         return self
     
@@ -28,15 +28,15 @@ class Hospital:
     
     def __str__(self):
         res = "{}, адрес: {}\n".format(self.name, self.adress)
-        res += "доктора:\n"
+        res += "Врачи:\n"
         for d in self.doctors:
-            res += str(w) + "\n"
-            res += "мед-сестры:\n"
+            res += str(d) + "\n"
+        res += "Мед-сестры:\n"
         for n in self.nurses:
-            res += str(c) + "\n"
-            return res
+            res += str(n) + "\n"
+        return res
     
-    def _replace(self, worker, index):
+    def replace(self, worker, index):
         lenW = len(self.doctors)
         if index < lenW:
             if not isinstance(worker, Doctor):
