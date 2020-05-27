@@ -37,8 +37,8 @@ def balanced_num(num):
 #    rightS = num % (10 ** (num_l // 2))
 #    return (_count(leftS) == _count(rightS))
 
-#print('4251 is ', balanced_num(4251))
-#print('2222 is ',balanced_num(2222))
+print('4251 is ', balanced_num(4251))
+print('2222 is ',balanced_num(2222))
 #print('135622 is ',balanced_num(135622))
 #print('56239814 is ', balanced_num(56239814))
 #print('13 is',balanced_num(13))
