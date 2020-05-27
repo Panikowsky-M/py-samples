@@ -8,26 +8,29 @@ try:
     assert str(d) == "Петров Александр, 32 лет"
 
     d.addPatient(777,"Сергей","Бурунов")
-    assert d.Dprint()  == "Мед.книжка 777: Бурунов Сергей\n"
-#
-#w.removeCheck(4)
-#assert w.printChecks() == "стол 12: 12000.50 руб\n"
-#
-#c = Cook("Кито","Иташима", 56)
-#c.setspeciality("японская кухня")
-#assert str(c) == "Кито Иташима, 56 лет, японская кухня"
-#
-#c.addDish("роллы Филадельфия", 20)
-#c.addDish("сет Саяке", 60)
-#assert c.printDishs() == "блюдо роллы Филадельфия: 20 мин\nблюдо сет Саяке: 60 мин\n"
-#
-#c.removeDish("роллы Филадельфия")
-#assert c.printDishs() == "блюдо сет Саяке: 60 мин\n"
-#
-#f = Cafe("Якитория", "ул. Ленина, 5/1")
-#f += c
-#f += w
-#assert str(f) == "Якитория, адрес: ул. Ленина, 5/1\nофицианты:\nИван Иванов, 20 лет\nповара:\nКито Иташима, 56 лет, японская кухня\n"
+    d.addPatient(778,"Александра","Бортич")
+    assert d.Dprint()  == "Мед.книжка 777: Бурунов Сергей\nМед.книжка 778:\
+ Бортич Александра\n"
+
+    d.removePatient(778)
+    assert d.Dprint() == "Мед.книжка 777: Бурунов Сергей\n"
+
+    n = Nurse("Юрий","Никулин", 56)
+    n.setspecialty("Нейрохирург")
+    assert str(n) == "Юрий Никулин, 56 лет, Нейрохирург"
+
+    n.addWorkDay("Вт","7:00-19:00")
+    n.addWorkDay("Ср","16:30-16:30 след.")
+    assert n.Nprint() == "Вт - Часы работы: 7:00-19:00\nСр\
+ - Часы работы: 16:30-16:30 след.\n"
+
+    n.removeWorkDay("Ср")
+    assert n.Nprint() == "Вт - Часы работы: 7:00-19:00\n"
+
+    #test = Hospital("Якитория", "ул. Ленина, 5/1")
+    #tesr += c
+    #tesr += w
+    #assert str(f) == "Якитория, адрес: ул. Ленина, 5/1\nофицианты:\nИван Иванов, 20 лет\nповара:\nКито Иташима, 56 лет, японская кухня\n"
 #assert len(f) == 2
 #f -= w
 #assert len(f) == 1
@@ -35,19 +38,12 @@ try:
 #f += w
 #assert f.get(0) == w
 #w2 = Waiter("Петр", "Петров", 30)
-#f.replace(w2, 0)
-#assert f.get(0) == w2
-#f.delete(0)
-#assert f.get(0) == c
+#f.replace(w2, 0) #assert f.get(0) == w2 #f.delete(0) #assert f.get(0) == c
 #
 #f += w
 #f += w2
 #f.toFile("якитория")
-#
-#
-#
-#
-#
+
 except AssertionError:
     print("TEST ERROR")
     traceback.print_exc()

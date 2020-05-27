@@ -3,7 +3,7 @@ from nurse import Nurse
 
 class Hospital:
 
-    def _start(self, name, adress):
+    def __init__(self, name, adress):
         self.name = name
         self.adress = adress
         self.doctors = []
@@ -19,20 +19,20 @@ class Hospital:
             self.nurses.append(worker)
         return self
     
-    def NewSub(self, worker):
-        if isinstance(worker, Waiter):
+    def __sub__(self, worker):
+        if isinstance(worker, Doctor):
             self.doctors.remove(worker)
-        elif isinstance(worker, Cook):
+        elif isinstance(worker, Nurse):
             self.nurses.remove(worker)
         return self
     
-    def NewStr(self):
+    def __str__(self):
         res = "{}, адрес: {}\n".format(self.name, self.adress)
         res += "доктора:\n"
-        for w in self.doctors:
+        for d in self.doctors:
             res += str(w) + "\n"
             res += "мед-сестры:\n"
-        for c in self.nurses:
+        for n in self.nurses:
             res += str(c) + "\n"
             return res
     

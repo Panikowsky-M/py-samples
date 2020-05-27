@@ -15,7 +15,7 @@ class Doctor(Person):
     def Dprint(self):
         res=""
         for card in self.patList.keys():
-            res+="Мед.книжка {}: {} \n".format(card, self.patList[card])
+            res+="Мед.книжка {}: {}\n".format(card, self.patList[card])
         return res
     
     def __str__(self):
