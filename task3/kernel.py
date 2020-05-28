@@ -42,13 +42,13 @@ try:
 
     d1 = Doctor("Александра","Бортич",28)
     test.replace(d1,0)
-    print(test.get(0))
-    #assert test.get(0) == d2
-
+    assert test.get(0) == d1
     test._delete(0)
-
     assert test.get(0) == n
-
+    
+    test+= d
+    test+= d1
+    test.Write("hospital-Engels.dat")
 except AssertionError:
     print("TEST ERROR")
     traceback.print_exc()

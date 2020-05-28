@@ -41,11 +41,11 @@ class Hospital:
         if index < lenW:
             if not isinstance(worker, Doctor):
                 raise Exception("неверный тип работника")
-                self.doctors[index] = worker
+            self.doctors[index] = worker
         elif index < (lenW + len(self.nurses)):
              if not isinstance(worker, Nurse):
                 raise Exception("неверный тип работника")
-                self.nurses[index-lenW] = worker
+             self.nurses[index-lenW] = worker
         else:
             raise Exception("неверный индекс")
     
