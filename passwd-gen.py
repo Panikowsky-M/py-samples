@@ -8,4 +8,7 @@ passwd = []
 for i in range(0,15):
 	passwd+= random.choice(s0)
 	time.sleep(0)
-print(str(passwd))
+result = ''
+for i in passwd:
+    result+=i
+print(result)
