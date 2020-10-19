@@ -31,20 +31,29 @@ def getRepo(name):
             url = el.attrib["href"]
             if ".whl#" in url:
                 pack_link = url
+    if pack_link == None:
+        print("whl-архив не найден")
+        return 0
     return pack_link
+
 
 pack = pullPacket(getRepo(SEARCH))
 
-# Представление архива
-arc = io.BytesIO(pack)
-_zip = zipfile.ZipFile(arc)
+def getPacketMeta(packet):
+    # Представление архива
+    arc = io.BytesIO(packet)
+    _zip = zipfile.ZipFile(arc)
+    
+    metainfo = []
+    metapath = [s for s in _zip.namelist() if "METADATA" in s][0]
+    print(metapath)
+    
+    with _zip.open(metapath) as f:
+        meta = f.read().decode("utf-8")
+    
+    print("\nМетаданные:\n")
+    for line in meta:
+        metainfo.append(line[1])
+    return metainfo
 
-metapath = [s for s in _zip.namelist() if "METADATA" in s][0]
-print(metapath)
-
-with _zip.open(metapath) as f:
-    meta = f.read().decode("utf-8")
-
-print("Метаданные:\n")
-for line in meta.split("\n"):
-    print(line)
+print(getPacketMeta(pack))
