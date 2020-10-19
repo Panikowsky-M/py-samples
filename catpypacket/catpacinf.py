@@ -1,14 +1,25 @@
-import requests
+import io,zipfile
+import requests,urllib
 import xml.etree.ElementTree as xmlElement
-import tarfile
 
 
 print("Вводите название пакета:\n")
 SEARCH = input()
-FILENAME = 'testfile.tar.gz'
 LINK  = str('https://pypi.org/simple/%s' % SEARCH)
 
-def printRepo(name):
+
+# Загрузим пакет с репозитория
+
+def pullPacket(url):
+    with urllib.request.urlopen(url) as _content:
+        packContent = _content.read()
+        print('Пакет загружен')
+    return packContent
+
+
+# Разбором html найдем пакет в формате whl
+
+def getRepo(name):
     rq = requests.get(LINK)
     print('Статус запроса - %s'%(rq.status_code))
     print('MIME загружаемого файла - %s'%(rq.headers['content-type']))
@@ -22,30 +33,18 @@ def printRepo(name):
                 pack_link = url
     return pack_link
 
-print(printRepo(SEARCH))
+pack = pullPacket(getRepo(SEARCH))
 
-"""
-print('Пакет загружен')
-with open(FILENAME,'wb') as _file:
-    _file.write(rq.content)
+# Представление архива
+arc = io.BytesIO(pack)
+_zip = zipfile.ZipFile(arc)
 
-print("Содержимое:\n")
-with tarfile.open(FILENAME,"r") as arc:
-    for lst in arc:
-        print(lst.name)
-        if lst.isreg():
-            print("файл\n---")
-        elif lst.isdir():
-            print("папка\n---")
-        else:
-            print("сущ.\n---")
-    meta = arc.extractfile(META)
-    print("\nМетаданные пакета:\n====\n" +\
-          meta.read().decode('utf-8') )
+metapath = [s for s in _zip.namelist() if "METADATA" in s][0]
+print(metapath)
 
-    for inf in arc.getmembers():
-        if fnmatch.fnmatch(inf.name,META):
-            print(inf.name)
-            arc.extract(inf.name,PATH)
+with _zip.open(metapath) as f:
+    meta = f.read().decode("utf-8")
 
-    """
+print("Метаданные:\n")
+for line in meta.split("\n"):
+    print(line)
