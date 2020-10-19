@@ -71,21 +71,26 @@ def getDepsGraph(name):
     def _walk(name):
         print(name)
         graph[name] = set()
-        deps = getPacketDeps(\
-                getPacketMeta(pullPacket(getLink(name))) )
+        url = getLink(name)
+        if not url:
+            return
+        deps = getPacketDeps( getPacketMeta(pullPacket(url)) )
         for d in deps:
             graph[name].add(d)
-            _walk(d)
+            if d not in graph:
+                _walk(d)
     _walk(name)
     return graph
 
 gr1 = getDepsGraph(SEARCH)
 
+
+# Родительский и дочерний узел p,q
 def graphViz(g):
     gvStrings = ["digraph G {"]
     for p in g:
         for q in g[p]:
-            gvStrings.append('"%s" -> "%s"',% (p,q) )
+            gvStrings.append('"%s" -> "%s"' % (p,q) )
     gvStrings.append("}")
     return "\n".join(gvStrings)
 
