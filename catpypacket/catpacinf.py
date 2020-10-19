@@ -6,8 +6,17 @@ import xml.etree.ElementTree as xmlElement
 print("Вводите название пакета:\n")
 SEARCH = input()
 
-# Загрузим пакет с репозитория
+# Родительский и дочерний узел p,q
+def graphViz(g):
+    gvStrings = ["digraph G {"]
+    for p in g:
+        for q in g[p]:
+            gvStrings.append('"%s" -> "%s"' % (p,q) )
+    gvStrings.append("}")
+    print("\n=============\nПостроенный граф зависимостей\n")
+    return "\n".join(gvStrings)
 
+# Загрузим пакет с репозитория
 def pullPacket(url):
     with urllib.request.urlopen(url) as _content:
         packContent = _content.read()
@@ -53,7 +62,7 @@ def getPacketMeta(packet):
 def getPacketDeps(metainfo):
     deps = []
     for line in metainfo.split("\n"):
-        line = line.split()
+        line = line.replace(";","").split()
         if not line:
             break
         if line[0] == "Requires-Dist:" and "extra" not in line:
@@ -69,7 +78,7 @@ def getPacketDeps(metainfo):
 def getDepsGraph(name):
     graph = {}
     def _walk(name):
-        print(name)
+        print("\n----\nЗависимости пакета :\n%s" % name)
         graph[name] = set()
         url = getLink(name)
         if not url:
@@ -82,16 +91,13 @@ def getDepsGraph(name):
     _walk(name)
     return graph
 
-gr1 = getDepsGraph(SEARCH)
-
-
-# Родительский и дочерний узел p,q
-def graphViz(g):
-    gvStrings = ["digraph G {"]
-    for p in g:
-        for q in g[p]:
-            gvStrings.append('"%s" -> "%s"' % (p,q) )
-    gvStrings.append("}")
-    return "\n".join(gvStrings)
-
-print(graphViz(gr1))
+print("\nЧто следует делать с пакетом?\n")
+In = int(input("1 - Вывести метаданные\n2 - Вывести зависимости\n\
+3 - Построить граф зависимостей\n"))
+if In == 1:
+    print( getPacketMeta(pullPacket(getLink(SEARCH))) )
+if In == 2:
+    print( getPacketDeps(getPacketMeta(pullPacket(getLink(SEARCH)))) )
+if In == 3:
+    gr1 = getDepsGraph(SEARCH)
+    print(graphViz(gr1))

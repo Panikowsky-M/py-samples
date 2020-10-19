@@ -1,0 +1,1 @@
+['six', 'websocket-client', 'requests', 'ipaddress', 'backports.ssl-match-hostname', 'pywin32']

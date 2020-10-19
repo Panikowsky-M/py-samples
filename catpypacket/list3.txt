@@ -1,0 +1,258 @@
+ python3 catpacinf.py
+Вводите название пакета:
+
+tensorflow
+
+Что следует делать с пакетом?
+
+1 - Вывести метаданные
+2 - Вывести зависимости
+3 - Построить граф зависимостей
+3
+
+----
+Зависимости пакета :
+tensorflow
+
+----
+Зависимости пакета :
+absl-py
+
+----
+Зависимости пакета :
+six
+
+----
+Зависимости пакета :
+enum34
+
+----
+Зависимости пакета :
+astunparse
+
+----
+Зависимости пакета :
+wheel
+
+----
+Зависимости пакета :
+gast
+
+----
+Зависимости пакета :
+google-pasta
+
+----
+Зависимости пакета :
+h5py
+
+----
+Зависимости пакета :
+cached-property
+
+----
+Зависимости пакета :
+numpy
+
+----
+Зависимости пакета :
+keras-preprocessing
+
+----
+Зависимости пакета :
+opt-einsum
+
+----
+Зависимости пакета :
+protobuf
+
+----
+Зависимости пакета :
+setuptools
+
+----
+Зависимости пакета :
+tensorboard
+
+----
+Зависимости пакета :
+grpcio
+
+----
+Зависимости пакета :
+futures
+
+----
+Зависимости пакета :
+google-auth
+
+----
+Зависимости пакета :
+cachetools
+
+----
+Зависимости пакета :
+pyasn1-modules
+
+----
+Зависимости пакета :
+pyasn1
+
+----
+Зависимости пакета :
+rsa
+
+----
+Зависимости пакета :
+google-auth-oauthlib
+
+----
+Зависимости пакета :
+requests-oauthlib
+
+----
+Зависимости пакета :
+oauthlib
+
+----
+Зависимости пакета :
+requests
+
+----
+Зависимости пакета :
+chardet
+
+----
+Зависимости пакета :
+idna
+
+----
+Зависимости пакета :
+urllib3
+
+----
+Зависимости пакета :
+certifi
+
+----
+Зависимости пакета :
+markdown
+
+----
+Зависимости пакета :
+importlib-metadata
+
+----
+Зависимости пакета :
+zipp
+
+----
+Зависимости пакета :
+pathlib2
+
+----
+Зависимости пакета :
+scandir
+
+----
+Зависимости пакета :
+contextlib2
+
+----
+Зависимости пакета :
+configparser
+
+----
+Зависимости пакета :
+tensorboard-plugin-wit
+
+----
+Зависимости пакета :
+werkzeug
+
+----
+Зависимости пакета :
+tensorflow-estimator
+
+----
+Зависимости пакета :
+termcolor
+whl-архив не найден
+
+----
+Зависимости пакета :
+wrapt
+whl-архив не найден
+
+=============
+Построенный граф зависимостей
+
+digraph G {
+"tensorflow" -> "h5py"
+"tensorflow" -> "google-pasta"
+"tensorflow" -> "six"
+"tensorflow" -> "wheel"
+"tensorflow" -> "absl-py"
+"tensorflow" -> "numpy"
+"tensorflow" -> "termcolor"
+"tensorflow" -> "protobuf"
+"tensorflow" -> "gast"
+"tensorflow" -> "opt-einsum"
+"tensorflow" -> "wrapt"
+"tensorflow" -> "tensorboard"
+"tensorflow" -> "keras-preprocessing"
+"tensorflow" -> "grpcio"
+"tensorflow" -> "tensorflow-estimator"
+"tensorflow" -> "astunparse"
+"absl-py" -> "enum34"
+"absl-py" -> "six"
+"astunparse" -> "wheel"
+"astunparse" -> "six"
+"google-pasta" -> "six"
+"h5py" -> "cached-property"
+"h5py" -> "numpy"
+"keras-preprocessing" -> "six"
+"keras-preprocessing" -> "numpy"
+"opt-einsum" -> "numpy"
+"protobuf" -> "setuptools"
+"protobuf" -> "six"
+"tensorboard" -> "futures"
+"tensorboard" -> "six"
+"tensorboard" -> "tensorboard-plugin-wit"
+"tensorboard" -> "markdown"
+"tensorboard" -> "wheel"
+"tensorboard" -> "absl-py"
+"tensorboard" -> "numpy"
+"tensorboard" -> "google-auth"
+"tensorboard" -> "protobuf"
+"tensorboard" -> "werkzeug"
+"tensorboard" -> "grpcio"
+"tensorboard" -> "setuptools"
+"tensorboard" -> "requests"
+"tensorboard" -> "google-auth-oauthlib"
+"grpcio" -> "enum34"
+"grpcio" -> "futures"
+"grpcio" -> "six"
+"google-auth" -> "six"
+"google-auth" -> "rsa"
+"google-auth" -> "cachetools"
+"google-auth" -> "pyasn1-modules"
+"google-auth" -> "setuptools"
+"pyasn1-modules" -> "pyasn1"
+"rsa" -> "pyasn1"
+"google-auth-oauthlib" -> "google-auth"
+"google-auth-oauthlib" -> "requests-oauthlib"
+"requests-oauthlib" -> "oauthlib"
+"requests-oauthlib" -> "requests"
+"requests" -> "certifi"
+"requests" -> "chardet"
+"requests" -> "urllib3"
+"requests" -> "idna"
+"markdown" -> "importlib-metadata"
+"importlib-metadata" -> "pathlib2"
+"importlib-metadata" -> "configparser"
+"importlib-metadata" -> "zipp"
+"importlib-metadata" -> "contextlib2"
+"pathlib2" -> "six"
+"pathlib2" -> "scandir"
+}
