@@ -4,26 +4,25 @@ import xml.etree.ElementTree as xmlElement
 
 
 print("Вводите название пакета:\n")
-SEARCH = "docker"
-LINK  = str('https://pypi.org/simple/%s' % SEARCH)
-
+SEARCH = input()
 
 # Загрузим пакет с репозитория
 
 def pullPacket(url):
     with urllib.request.urlopen(url) as _content:
         packContent = _content.read()
-        print('Пакет загружен')
+        #print('Пакет загружен')
     return packContent
 
 
 # Разбором html найдем пакет в формате whl
 
 def getLink(name):
+    LINK  = str('https://pypi.org/simple/%s' % name)
     rq = requests.get(LINK)
-    print('Статус запроса - %s'%(rq.status_code))
-    print('MIME загружаемого файла - %s'%(rq.headers['content-type']))
-    print('Кодировка - %s'%(rq.encoding))
+    #print('Статус запроса - %s'%(rq.status_code))
+    #print('MIME загружаемого файла - %s'%(rq.headers['content-type']))
+    #print('Кодировка - %s'%(rq.encoding))
     docRoot = xmlElement.fromstring(rq.content)
     pack_link = None
     for el in docRoot[1]:
@@ -36,7 +35,7 @@ def getLink(name):
         return 0
     return pack_link
 
-def getPacketDeps(packet):    #getPacketMeta(packet)
+def getPacketMeta(packet):
     # Представление архива
     arc = io.BytesIO(packet)
     _zip = zipfile.ZipFile(arc)
@@ -48,12 +47,12 @@ def getPacketDeps(packet):    #getPacketMeta(packet)
     with _zip.open(metapath) as f:
         meta = f.read().decode("utf-8")
     
-    #return meta
+    return meta
 
 
-#def getPacketDeps(metainfo):
+def getPacketDeps(metainfo):
     deps = []
-    for line in meta.split("\n"):
+    for line in metainfo.split("\n"):
         line = line.split()
         if not line:
             break
@@ -66,7 +65,8 @@ def getDepsGraph(name):
     def rec(name):
         print(name)
         graph[name] = set()
-        deps = getPacketDeps( pullPacket(getLink(name)) ) 
+        deps = getPacketDeps(\
+                getPacketMeta(pullPacket(getLink(name))) )
         for d in deps:
             graph[name].add(d)
             rec(d)
