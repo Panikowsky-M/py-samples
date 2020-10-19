@@ -4,7 +4,7 @@ import xml.etree.ElementTree as xmlElement
 
 
 print("Вводите название пакета:\n")
-SEARCH = input()
+SEARCH = "docker"
 LINK  = str('https://pypi.org/simple/%s' % SEARCH)
 
 
@@ -19,7 +19,7 @@ def pullPacket(url):
 
 # Разбором html найдем пакет в формате whl
 
-def getRepo(name):
+def getLink(name):
     rq = requests.get(LINK)
     print('Статус запроса - %s'%(rq.status_code))
     print('MIME загружаемого файла - %s'%(rq.headers['content-type']))
@@ -36,28 +36,24 @@ def getRepo(name):
         return 0
     return pack_link
 
-
-pack = pullPacket(getRepo(SEARCH))
-
-def getPacketMeta(packet):
+def getPacketDeps(packet):    #getPacketMeta(packet)
     # Представление архива
     arc = io.BytesIO(packet)
     _zip = zipfile.ZipFile(arc)
     
     # Просмотр содержимого на предмет файла METADATA
     metapath = [s for s in _zip.namelist() if "METADATA" in s][0]
-    print(metapath)
+    #print(metapath)
     
     with _zip.open(metapath) as f:
         meta = f.read().decode("utf-8")
     
-    return meta
+    #return meta
 
-print(getPacketMeta(pack))
 
-def getPacketDeps(metainfo):
+#def getPacketDeps(metainfo):
     deps = []
-    for line in metainfo.split("\n"):
+    for line in meta.split("\n"):
         line = line.split()
         if not line:
             break
@@ -65,5 +61,16 @@ def getPacketDeps(metainfo):
             deps.append(line[1])
     return deps
 
-selected = getPacketMeta(pack)
+def getDepsGraph(name):
+    graph = {}
+    def rec(name):
+        print(name)
+        graph[name] = set()
+        deps = getPacketDeps( pullPacket(getLink(name)) ) 
+        for d in deps:
+            graph[name].add(d)
+            rec(d)
+    rec(name)
+    return graph
 
+print( getDepsGraph(SEARCH) )
