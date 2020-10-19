@@ -60,17 +60,33 @@ def getPacketDeps(metainfo):
             deps.append(line[1])
     return deps
 
+"""
+         Получим граф составленный из зависимостей пакета
+Будем заполнять узлы графа из найденных зависимостей пакета.
+Зависимости - список, проитерируем его и и по каждой 
+итерации будем рекурсивно звать функцию итерации зависимости
+"""
 def getDepsGraph(name):
     graph = {}
-    def rec(name):
+    def _walk(name):
         print(name)
         graph[name] = set()
         deps = getPacketDeps(\
                 getPacketMeta(pullPacket(getLink(name))) )
         for d in deps:
             graph[name].add(d)
-            rec(d)
-    rec(name)
+            _walk(d)
+    _walk(name)
     return graph
 
-print( getDepsGraph(SEARCH) )
+gr1 = getDepsGraph(SEARCH)
+
+def graphViz(g):
+    gvStrings = ["digraph G {"]
+    for p in g:
+        for q in g[p]:
+            gvStrings.append('"%s" -> "%s"',% (p,q) )
+    gvStrings.append("}")
+    return "\n".join(gvStrings)
+
+print(graphViz(gr1))
