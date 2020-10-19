@@ -44,16 +44,26 @@ def getPacketMeta(packet):
     arc = io.BytesIO(packet)
     _zip = zipfile.ZipFile(arc)
     
-    metainfo = []
+    # Просмотр содержимого на предмет файла METADATA
     metapath = [s for s in _zip.namelist() if "METADATA" in s][0]
     print(metapath)
     
     with _zip.open(metapath) as f:
         meta = f.read().decode("utf-8")
     
-    print("\nМетаданные:\n")
-    for line in meta:
-        metainfo.append(line[1])
-    return metainfo
+    return meta
 
 print(getPacketMeta(pack))
+
+def getPacketDeps(metainfo):
+    deps = []
+    for line in metainfo.split("\n"):
+        line = line.split()
+        if not line:
+            break
+        if line[0] == "Requires-Dist:" and "extra" not in line:
+            deps.append(line[1])
+    return deps
+
+selected = getPacketMeta(pack)
+
