@@ -43,7 +43,7 @@ with open("packages-list.formula","w") as wrotesolve:
 
 print("Задача составлена, запустите в терминале minisat packages-list.formula solve.txt\n")
 print("Ожидаю файл solve.txt ...")
-FILENAME = input()
+FILENAME = str(input())
 
 with open(FILENAME) as solve:
     res = solve.read()
@@ -51,8 +51,7 @@ with open(FILENAME) as solve:
 res = res.split("\n")
 if res[0] == "SAT":
     pkg = dict((i + 1, s) for i,s in enumerate(packages))
-    for n in res.split():
+    for n in res[1].split():
         i = int(n)
-        if s > 0:
+        if i > 0:
             print(pkg[i])
-
