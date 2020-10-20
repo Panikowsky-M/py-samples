@@ -1,6 +1,7 @@
 import io,zipfile
 import requests,urllib
-import xml.etree.ElementTree as xmlElement
+from bs4 import BeautifulSoup as bSoup
+import re
 
 
 print("Вводите название пакета:\n")
@@ -32,15 +33,12 @@ def getLink(name):
     #print('Статус запроса - %s'%(rq.status_code))
     #print('MIME загружаемого файла - %s'%(rq.headers['content-type']))
     #print('Кодировка - %s'%(rq.encoding))
-    docRoot = xmlElement.fromstring(rq.content)
+    document = bSoup(rq.content,'html5lib')
     pack_link = None
-    for el in docRoot[1]:
-        if el.tag == "a":
-            url = el.attrib["href"]
-            if ".whl#" in url:
-                pack_link = url
+    for l in document.find_all('a'):
+        if re.findall('.whl#',str(l)):
+            pack_link = l.get('href')
     if pack_link == None:
-        print("whl-архив не найден")
         return 0
     return pack_link
 
