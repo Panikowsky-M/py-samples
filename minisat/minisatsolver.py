@@ -1,5 +1,3 @@
-import time.sleep as WAIT
-
 packages = dict(
         a = dict(depends = [["b"],["c"],["z"]], conflicts= []),
         b = dict(depends = [["d"]],conflicts=[]),
@@ -44,7 +42,6 @@ with open("packages-list.formula","w") as wrotesolve:
     wrotesolve.write(Formula)
 
 print("Задача составлена, запустите в терминале minisat packages-list.formula solve.txt\n")
-WAIT(7)
 print("Ожидаю файл solve.txt ...")
 FILENAME = input()
 
