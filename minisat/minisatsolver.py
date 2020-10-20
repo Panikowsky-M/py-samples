@@ -46,7 +46,7 @@ print("Ожидаю файл solve.txt ...")
 FILENAME = input()
 
 with open(FILENAME) as solve:
-    res = solve.read()
+    res = solve.readlines()
 
 res = res.split("\n")
 if res[0] == "SAT":
