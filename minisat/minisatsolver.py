@@ -1,6 +1,3 @@
-# Принимаем пакет и список зависимостей
-# и выводим их
-
 packages = dict(
         a = dict(depends = [["b"],["c"],["z"]], conflicts= []),
         b = dict(depends = [["d"]],conflicts=[]),
@@ -13,6 +10,8 @@ packages = dict(
         z = dict(depends = [],conflicts=[])
         )
 
+# Принимаем пакет и список зависимостей
+# и выводим их
 def dep(p,deps):
     deps = " ".join(["%d" % d for d in deps])
     return "-%d %s" % (p,deps)
@@ -39,5 +38,20 @@ def buldFormula(packs, inst): # Получаем формулу для SAT-ре�
     return "\n".join(["p cnf %d %d" % (len(packs),len(suggs))] + suggs)
 
 Formula = buldFormula(packages,["b","c"])
-with open("packages-list.cnf","w") as wrotesolve:
+with open("packages-list.formula","w") as wrotesolve:
     wrotesolve.write(Formula)
+
+print("Задача составлена, запустите minisat packages-list.formula solve.txt\n")
+print("Ожидаю файл solve.txt ...")
+FILENAME = input()
+
+with open("FILENAME") as solve:
+    res = solve.read()
+
+res = res.split("\n")
+if res[0] == "SAT":
+    pkg = dict((i + 1, s) for i,s in enumerate(packages))
+    v = int(v)
+    if s > 0:
+        print(pkg[i])
+
