@@ -57,5 +57,5 @@ if res[0] == "SAT":
     for n in res.split():
         i = int(n)
         if s > 0:
-        print(pkg[i])
+            print(pkg[i])
 
