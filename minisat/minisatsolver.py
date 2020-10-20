@@ -45,7 +45,7 @@ print("Задача составлена, запустите minisat packages-li
 print("Ожидаю файл solve.txt ...")
 FILENAME = input()
 
-with open("FILENAME") as solve:
+with open(FILENAME) as solve:
     res = solve.read()
 
 res = res.split("\n")
