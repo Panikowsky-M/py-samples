@@ -1,5 +1,7 @@
+from collections import namedtuple
 from pprint import pprint as prettify_out
 from sly import Lexer,Parser
+
 
 
 class conf(Lexer):
@@ -31,12 +33,12 @@ class confParse(Parser):
 
     @_('NAME names SEMICOLON')
     def simpledir(self,p):
-        return dict(type= "simple", val = [[p.NAME] + p.names], ctx=[])
+        return dict(type= "simple", args = [p.NAME] + p.names, ctx=[])
 
 
     @_('NAME names BEGIN directives END')
     def blockdir(self,p):
-        return dict(type = "block", val = [[p.NAME] + p.names], ctx=p.directives)
+        return dict(type = "block", args = [p.NAME] + p.names, ctx=p.directives)
 
     @_('NAME names')
     def names(self,p):
@@ -60,4 +62,5 @@ worker_rlimit_nofile 8122;
 
 lexer = conf()
 parser = confParse()
-prettify_out(parser.parse(lexer.tokenize(text)))
+data = parser.parse(lexer.tokenize(text))
+print(data)
