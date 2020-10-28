@@ -1,68 +1,63 @@
+from pprint import pprint as prettify_out
 from sly import Lexer,Parser
 
-text = """
-server {
-    location / {
-	# Проверка коменнтариев
-        fastcgi_pass  localhost:9000;
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-        fastcgi_param QUERY_STRING    $query_string;
-    }
-
-    location ~ \.(gif|jpg|png)$ {
-        root /data/images;
-    }
-}
-       """
 
 class conf(Lexer):
-    tokens = {BGN,END,NM,SEMIC}
-    BGN = r'{'
+    tokens = {BEGIN,END,NAME,SEMICOLON}
+    BEGIN = r'{'
     END = r'}'
-    NM = r'[^\t\#{};]+'
-    SEMIC = r';'
+    NAME = r'[^\t\#{};]+'
+    SEMICOLON = r';'
+    ignore = r' \t'
     ignore_comment = r'\#.*'
     ignore_newline = r'\n+'
-    ignore = r' \t'
 
-class parse(Parser):
+class confParse(Parser):
     tokens = conf.tokens
 
-    # Декратор для описания правил
+    # Декоратор для описания правил
+
     @_('directive directives')
     def directives(self,p):
-        pass
+        return [p.directive] + p.directives
 
     @_('empty')
     def directives(self,p):
-        pass
+        return []
     
-    @_('directive','block')
-    def directives(self,p):
-        pass
+    @_('simpledir','blockdir')
+    def directive(self,p):
+        return p[0]
 
-    @_('name names BGN directives END')
-    def block(self,p):
-        pass
+    @_('NAME names SEMICOLON')
+    def simpledir(self,p):
+        return dict(type= "simple", val = [[p.NAME] + p.names], ctx=[])
+
+
+    @_('NAME names BEGIN directives END')
+    def blockdir(self,p):
+        return dict(type = "block", val = [[p.NAME] + p.names], ctx=p.directives)
 
     @_('NAME names')
     def names(self,p):
-        pass
+        return [p.NAME] + p.names;
 
     @_('empty')
     def names(self,p):
-        pass
+        return []
 
     @_('')
     def empty(self,p):
         pass
 
-"""
-lexem = conf()
-pasrer = parse()
-print(pasrer.parse(lexem.tokinez(text)))
+text = """
+user     www www;
+worker_process 5; # Default
+error_log logs/error.log;
+pid       logs/nginx.pid;
+worker_rlimit_nofile 8122;
 """
 
 lexer = conf()
-for token in lexer.tokenize(text):
-    print(token)
+parser = confParse()
+prettify_out(parser.parse(lexer.tokenize(text)))
