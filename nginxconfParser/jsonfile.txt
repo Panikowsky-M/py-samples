@@ -1,0 +1,12 @@
+{
+    "server":"{",
+    "location":["~", "\\.(gif|jpg|png)$", "{"],
+    "fastcgi_pass":"localhost:9000;",
+    "fastcgi_param":["QUERY_STRING", "$query_string;"],
+    "fastcgi_param":["QUERY_STRING", "$query_string;"],
+    "}":[],
+    "location":["~", "\\.(gif|jpg|png)$", "{"],
+    "root":"/data/images;",
+    "}":[],
+    "}":[]
+}
