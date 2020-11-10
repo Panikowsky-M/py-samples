@@ -19,4 +19,16 @@ def getHashes(git):
 
 d = '.git/objects/'
 objects = getHashes(d)
-pp(objects.get('77'))
+
+list1 = []
+for i in objects.keys():
+    list1.append(i)
+
+list1 = sorted(list1)
+list2 = []
+list3 = []
+for l in range(len(list1)):
+    for m in range(len(objects.get(list1[l]))):
+        list3.append('{}-> {}'.format(list1[l],objects.get(list1[l])[m] ))
+
+pp(list3)
