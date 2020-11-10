@@ -20,15 +20,22 @@ def getHashes(git):
 d = '.git/objects/'
 objects = getHashes(d)
 
-list1 = []
-for i in objects.keys():
-    list1.append(i)
+def getObjects(o):
+    _keys = []
+    for i in o.keys():
+        _keys.append(i)
+    
+    keysList = sorted(_keys)
+    #list2 = []
+    objectHashCodes = []
+    for l in range(len(keysList)):
+        for m in range(len(o.get(keysList[l]))):
+            objectHashCodes.append('{}{}'.format(keysList[l],o.get(keysList[l])[m] ))
 
-list1 = sorted(list1)
-list2 = []
-list3 = []
-for l in range(len(list1)):
-    for m in range(len(objects.get(list1[l]))):
-        list3.append('{}-> {}'.format(list1[l],objects.get(list1[l])[m] ))
+    return objectHashCodes
 
-pp(list3)
+pp(getObjects(objects))
+
+fullhashes = []
+for n in getObjects(objects):
+    os.system('git cat-file -t %s' % n)
