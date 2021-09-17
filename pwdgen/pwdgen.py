@@ -1,21 +1,30 @@
 #!/bin/python
 
 import csv
-import gzip
-import string
+import codecs
 import random
 import secrets
+import tarfile
 
+AR = 'words.dat'
+tar = tarfile.open(AR)
 DICE_COUNT = 5
 dice_rolls = []
 word_list = []
+filecontent = []
 
 signs = ['</>','.','*^*','+','+=+','~>',';)',';(',':)',';(']
 
-# Чтение csv-шек
+# Выбор длины пароля 
 
-with gzip.open('leetspeak.bin','rt') as f:
-    ls_dict = dict(filter(None, csv.reader(f)))
+
+# Чтение csv-шек из архива
+
+for m in tar.getmembers():
+    file = tar.extractfile(m)
+    filecontent.append(file.readlines())
+
+ls_dict = dict(filter(None, csv.reader( codecs.iterdecode(filecontent[0],'utf-8') ) )  )
 
 def cvrt_text(data):
     list_data = list(data)
@@ -32,19 +41,17 @@ for i in range(1,2):
   dice = ''.join(str(secrets.randbelow(6) + 1) for r in range(DICE_COUNT))
   dice_rolls.append(dice)
 
-with gzip.open('wordlist.bin','rt') as w:
-    wrd = dict(filter(None, csv.reader(w)))
-    for i in dice_rolls:
-        for k, v in wrd.items():
-            if i == k:
-                word_list.append(v)
+wrd = dict(filter(None, csv.reader(codecs.iterdecode(filecontent[2],'utf-8')) ))  
+for i in dice_rolls:
+  for k, v in wrd.items():
+    if i == k:
+     word_list.append(v)
 
-with gzip.open('scientist.bin','rt') as _s:
-    sc = dict(filter(None, csv.reader(_s)))
-    for i in dice_rolls:
-        for k, v in sc.items():
-            if i == k:
-                word_list.append(v)
+sc = dict(filter(None, csv.reader(codecs.iterdecode(filecontent[1],'utf-8')) )) 
+for i in dice_rolls:
+  for k, v in sc.items():
+      if i == k:
+          word_list.append(v)
 
 print('\n- Выбор слов был таким: -\n')
 for i in word_list:
