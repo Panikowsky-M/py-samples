@@ -17,6 +17,19 @@ signs = ['</>','.','*^*','+','+=+','~>',';)',';(',':)',';(']
 
 # Выбор длины пароля 
 
+while True:
+    try:
+        pwd_lenght = int(input('Выберите количество костей для генерации пароля (Рекомендовано как минимум 6): '))
+        val = int(pwd_lenght)
+        if val > 0:
+            break
+        else:
+            print("\nЧисло не может быть 0 или отрицательным\n")
+            continue
+    except ValueError:
+        print("\nВообще-то на вход поступают числа !n")
+        continue
+
 
 # Чтение csv-шек из архива
 
@@ -37,7 +50,7 @@ def cvrt_text(data):
 
     return output_text
 
-for i in range(1,2):
+for i in range(pwd_lenght):
   dice = ''.join(str(secrets.randbelow(6) + 1) for r in range(DICE_COUNT))
   dice_rolls.append(dice)
 
